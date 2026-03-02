@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gabrielle LeChupette</title>
+    <style>
+        /* CUEVA OSCURA */
+        body, html {
+            margin: 0; padding: 0;
+            width: 100%; height: 100%;
+            overflow: hidden;
+            background-color: #000;
+            display: flex; justify-content: center; align-items: center;
+        }
+
+        /* HUECO PARA MIRAR DIBUJO */
+        #mask {
+            /* RECORTE: Le sacamos 2px para que la linea blanca quede afuera */
+            width: 1048px; 
+            height: 640px; 
+            overflow: hidden;
+            position: relative;
+            border: 2px solid #111;
+            background-color: #000;
+        }
+
+        /* DIBUJO QUE SE MUEVE ATRAS */
+        #sprite-layer {
+            position: absolute;
+            background-image: url('https://i.imgur.com/GN17nyJ.jpeg');
+            background-repeat: no-repeat;
+            
+            /* TAMAÑO DE TODA LA PORQUERÍA (X3) */
+            background-size: 7350px 3852px; 
+            width: 7350px;
+            height: 3852px;
+            
+            image-rendering: crisp-edges;
+            
+            /* EMPUJE: Metemos el dibujo 1px adentro de la mascara */
+            left: -1px; 
+            top: -1px;
+            will-change: transform;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="mask">
+        <div id="sprite-layer"></div>
+    </div>
+
+    <script>
+        const layer = document.getElementById('sprite-layer');
+        /* MUCHAS GABIS */
+        const TOTAL_FRAMES = 39;
+        /* FILAS */
+        const COLS = 7;
+        /* MEDIDAS */
+        const FW = 1050; 
+        const FH = 642; 
+
+        /* CUANDO MOVER MANO CON RATON */
+        window.addEventListener('mousemove', (e) => {
+            const percent = e.clientX / window.innerWidth;
+            const frameIndex = Math.floor(percent * (TOTAL_FRAMES - 1));
+            
+            const col = frameIndex % COLS;
+            const row = Math.floor(frameIndex / COLS);
+            
+            const x = col * FW;
+            const y = row * FH;
+            
+            /* MOVER PARA QUE NO SE VEA MUESCA FEA DE ABAJO */
+            /* El +1 limpia el borde de abajo mientras el top:-1 limpia arriba */
+            layer.style.transform = `translate(-${x}px, -${y}px)`;
+        });
+
+        /* Te vas a acordar de mí
+
+                                      .____.
+           xuu$``$$$uuu.
+         . $``$  $$$`$$$
+        dP*$  $  $$$ $$$
+        ?k $  $  $$$ $$$
+         $ $  $  $$$ $$$
+         ":$  $  $$$ $$$
+          N$  $  $$$ $$$
+          $$  $  $$$ $$$
+           $  $  $$$ $$$
+           $  $  $$$ $$$
+           $  $  $$$ $$$
+           $  $  $$$ $$$
+           $  $  $$$ $$$
+           $$#$  $$$ $$$
+           $$'$  $$$ $$$
+           $$`R  $$$ $$$
+           $$$&  $$$ $$$
+           $#*$  $$$ $$$
+           $  $  $$$ @$$
+           $  $  $$$ $$$
+           $  $  $$$ $$$
+           $  $  $B$ $$&.
+           $  $  $D$ $$$$$muL.
+           $  $  $Q$ $$$$$  `"**mu..
+           $  $  $R$ $$$$$    k  `$$*t
+           $  @  $$$ $$$$$    k   $$!4
+           $ x$uu@B8u$NB@$uuuu6...$$X?
+           $ $(`RF`$`````R$ $$5`"""#"R
+           $ $" M$ $     $$ $$$      ?
+           $ $  ?$ $     T$ $$$      $
+           $ $F H$ $     M$ $$K      $  ..
+           $ $L $$$  $$ $$R.     "d$$$$Ns.
+           $ $~ $$$     N$$$X      ."    "%2h
+           $ 4k f  $     *$ $$&      R       "iN
+           $ $$ %uz!     tuuR$$:     Buu      ?`:
+           $ $F          $??$8B      | '*Ned*$~L$
+           $ $k          $'@$$$      |$.suu+!' !$
+           $ ?N          $'$$@$      $*`      d:"
+           $ dL..........M.$&$$      5       d"P
+         ..$.^"*I$RR*$C""??77*?      "nu...n*L*
+        '$C"R   ``""!$*@#""` .uor    bu8BUU+!`
+        '*@m@.       *d"     *$Rouxxd"```$
+             R*@mu.           "#$R *$    !
+             *%x. "*L               $     %.
+                "N  `%.      ...u.d!` ..ue$$$o..
+                 @    ".    $*"""" .u$$$$$$$$$$$$beu...
+                8  .mL %  :R`     x$$$$$$$$$$$$$$$$$$$$$$$$$$WmeemeeWc
+               |$e!" "s:k 4      d$N"`"#$$$$$$$$$$$$$$$$$$$$$$$$$$$$$>
+               $$      "N @      $?$    F$$$$$$$$$$$$$$$$$$$$$$$$$$$$>
+               $@       ^%Uu..   R#8buu$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$>
+                          ```""*u$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$>
+                                 #$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$>
+                                  "5$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$>
+                                    `*$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$>
+                                      ^#$$$$$$$$$$$$$$$$$$$$$$$$$$$$$>
+                                         "*$$$$$$$$$$$$$$$$$$$$$$$$$$>
+                                           `"*$$$$$$$$$$$$$$$$$$$$$$$>
+                                               ^!$$$$$$$$$$$$$$$$$$$$>
+                                                   `"#+$$$$$$$$$$$$$$>
+                                                         ""**$$$$$$$$>
+                                                                ```""
+        */
+    </script>
+</body>
+</html>
